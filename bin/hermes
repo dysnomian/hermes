@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'hermes'
+
+ARGV.each do |filename|
+  Hermes.run(filename)
+end
