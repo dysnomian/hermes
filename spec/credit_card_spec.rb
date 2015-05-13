@@ -1,22 +1,20 @@
 describe CreditCard do
-  let(:card) { CreditCard.new(card_number) }
+  describe '#valid?' do
+    subject { CreditCard.new(cc).valid? }
 
-  describe "#valid?" do
-    let(:policy) { CreditCardValidationPolicy }
+    context 'when the card number is valid' do
+      let(:cc) { 4111111111111111 }
 
-    context "when card is invalid" do
-      let(:card_number) { 1234567890123456 }
-
-      it "returns false" do
-        expect(card.valid?).to be_falsey
+      it 'returns true' do
+        expect(subject).to be_truthy
       end
     end
 
-    context "when card is valid" do
-      let(:card_number) { 4111111111111111 }
+    context 'when the card is invalid' do
+      let(:cc) { 1234567890123456 }
 
-      it "returns true" do
-        expect(card.valid?).to be_truthy
+      it 'returns false' do
+        expect(subject).to be_falsey
       end
     end
   end
