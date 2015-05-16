@@ -3,5 +3,5 @@
 require 'hermes'
 
 ARGV.each do |filename|
-  Hermes.run(filename)
+  puts Hermes.run(filename)
 end
