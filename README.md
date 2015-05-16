@@ -5,6 +5,8 @@ Status](https://travis-ci.org/dysnomian/hermes.svg)](https://travis-ci.org/dysno
 
 An exploration of testing and clean design.
 
+TODO: CLI executable, rubygems upload.
+
 ## Installation
 
 Install it with:
