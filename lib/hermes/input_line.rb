@@ -3,6 +3,9 @@ class InputLine
 
   def initialize(input_string)
     @keywords ||= input_string.split(" ")
+    unless valid?
+      raise FormatError.new(input_string)
+    end
   end
 
   def to_hash
@@ -15,6 +18,10 @@ class InputLine
   end
 
   private
+
+  def valid?
+    [:add, :charge, :credit].include?(type)
+  end
 
   def type
     keywords[0].downcase.to_sym

@@ -9,12 +9,7 @@ module Hermes
   end
 
   def run(filename)
-    begin
-      present(register(transactions(input_lines(file_lines(filename)))))
-    rescue FormatError
-      "Error: Your input doesn't appear to be formatted correctly. \n\n"\
-        "You entered:\n\n #{File.read(filename)}"
-    end
+    present(register(transactions(input_lines(file_lines(filename)))))
   end
 
   private

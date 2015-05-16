@@ -10,8 +10,6 @@ module Transaction
       ChargeTransaction.new(hash)
     when hash[:type] == :credit
       CreditTransaction.new(hash)
-    else
-      raise FormatError
     end
   end
 end

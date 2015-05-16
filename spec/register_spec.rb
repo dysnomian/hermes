@@ -1,5 +1,5 @@
 describe Register do
-    let(:register) { Register.new(transactions: transactions) }
+  let(:register) { Register.new(transactions: transactions) }
 
   let(:add_transaction) do
     AddUserTransaction.new(
