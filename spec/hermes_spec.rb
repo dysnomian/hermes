@@ -6,9 +6,13 @@ describe Hermes do
   end
 
   describe '.run' do
+    let(:filename) { 'filename.txt' }
+
     before do
       allow(File).to receive(:readlines)
-        .with('filename.txt').and_return(input)
+        .with(filename).and_return(input)
+      allow(File).to receive(:read)
+        .and_return(input)
     end
 
     let(:input) do
@@ -22,7 +26,7 @@ describe Hermes do
         "Credit Dipper $200\n"]
     end
 
-    subject { Hermes.run('filename.txt') }
+    subject { Hermes.run(filename) }
 
     context 'when the file is valid' do
       let(:output) do
@@ -38,9 +42,13 @@ describe Hermes do
 
     context 'when the file is improperly formatted' do
       let(:output) do
-        "Dipper: error\n"\
-          "Mabel: $3093\n"\
-          "Soos: -$300\n"
+        "Error: Your input doesn't appear to be formatted correctly. \n\n"\
+          "You entered:\n\n #{File.read(filename)}"
+      end
+
+      before do
+        Hermes::TransactionProcessor.stub(:transactions)
+          .and_raise { FormatError }
       end
 
       it 'produces the expected output' do

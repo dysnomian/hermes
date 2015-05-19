@@ -34,4 +34,25 @@ describe 'InputLine' do
       end
     end
   end
+
+  describe '#parse_amount' do
+    subject { InputLine.new("").send(:parse_amount, amount) }
+
+    context 'with a simple dollar amount' do
+      let(:amount) { "$25" }
+
+      it 'returns the dollar value without the dollar sign' do
+        expect(subject).to eq(25)
+      end
+    end
+
+    context 'with cents' do
+      let(:amount) { "$25.01" }
+
+      it 'captures the cents value' do
+        expect(subject).to eq(25.01)
+      end
+    end
+  end
 end
+

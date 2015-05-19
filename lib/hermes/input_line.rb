@@ -33,11 +33,11 @@ class InputLine
   end
 
   def parse_amount(string)
-    amount_regex.match(string)[1].to_i
+    amount_regex.match(string)[1].to_f
   end
 
   def amount_regex
     # all digits between `$` at the start of a line and `.` or EOL
-    /^\$?(\d+)\.?\d{2}?/
+    /^\$?([\d\.]+)+$/
   end
 end
