@@ -1,0 +1,8 @@
+Add Soos 4111111111111111 $1000
+Add Mabel 5454545454545454 $3000
+Add Dipper 1234567890123456 $2000
+Charge Soos $500
+Charge Soos $800
+Charge Mabel $7
+Credit Mabel $100
+Credit Dipper $200

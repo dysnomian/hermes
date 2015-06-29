@@ -1,11 +1,4 @@
-class ChargeTransaction
-  attr_reader :account, :amount
-
-  def initialize(account:, amount: 0, **etc)
-    @account = account
-    @amount  = amount
-  end
-
+class ChargeTransaction < AbstractTransaction
   def apply(balances)
     current = balances.fetch(account, nil)
     balances[account] = current - amount if current

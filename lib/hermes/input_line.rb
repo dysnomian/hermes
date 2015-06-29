@@ -14,11 +14,11 @@ class InputLine
     }
   end
 
-  private
-
   def type
     keywords[0].downcase.to_sym
   end
+
+  private
 
   def account
     keywords[1]

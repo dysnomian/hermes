@@ -1,3 +1,4 @@
+# Receives a filename and generates appropriate transactions from it.
 class TransactionProcessor
   attr_reader :filename
 
@@ -8,9 +9,8 @@ class TransactionProcessor
   def run
     begin
       transactions
-    rescue FormatError
-      puts "Error: Your input doesn't appear to be formatted correctly. \n\n"\
-        "You entered:\n\n #{File.read(filename)}"
+    rescue FileFormatError
+      puts UIText.file_format_error(filename).to_s
       false
     end
   end
