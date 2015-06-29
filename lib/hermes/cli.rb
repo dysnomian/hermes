@@ -3,16 +3,12 @@ require "hermes"
 
 module Hermes
   class CLI < Thor
+    desc "balances PATH_TO_FILE", "Example: hermes parse filename.txt"
 
-    desc_text = "Example: hermes parse filename.txt"
+    default_task :balances
 
-    desc "parse PATH_TO_FILE", desc_text
-
-    def parse(path)
+    def balances(path)
       Hermes.run(path)
     end
-
-    default_task :parse
-
   end
 end
