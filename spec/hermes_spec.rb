@@ -29,7 +29,7 @@ describe Hermes do
     context 'when the file is improperly formatted' do
 
       before do
-        Transaction.stub(:generate_from).and_raise(FormatError)
+        allow(Transaction).to receive(:generate_from).and_raise(FormatError)
       end
 
       it 'produces the expected output' do
