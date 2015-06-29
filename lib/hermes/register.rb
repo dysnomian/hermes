@@ -1,7 +1,7 @@
 class Register
   attr_reader :transactions
 
-  def initialize(transactions: transactions)
+  def initialize(transactions:)
     @transactions = transactions
   end
 

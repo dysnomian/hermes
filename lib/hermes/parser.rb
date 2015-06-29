@@ -1,3 +1,4 @@
+# Takes a filename and converts the lines into InputLine objects.
 class Parser
   attr_reader :filename
 
@@ -8,7 +9,6 @@ class Parser
   def parse
     file_lines.map { |line| InputLine.new(line) }
   end
-
   private
 
   def file_lines

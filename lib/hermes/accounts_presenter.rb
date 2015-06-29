@@ -6,6 +6,10 @@ class AccountsPresenter
   end
 
   def print
+    puts printable_accounts
+  end
+
+  def printable_accounts
     accounts.reduce("") do |string, account|
       string.concat(readable_account(account))
     end
@@ -21,7 +25,11 @@ class AccountsPresenter
     balance.is_a?(Numeric) ? readable_amount(balance) : 'error'
   end
 
+  def formatted_amount(amount)
+    sprintf("%0.2f", amount)
+  end
+
   def readable_amount(balance)
-    balance < 0 ? "-$#{balance.abs}" : "$#{balance}"
+    balance < 0 ? "-$#{formatted_amount(balance.abs)}" : "$#{formatted_amount(balance)}"
   end
 end

@@ -2,6 +2,4 @@
 
 require 'hermes'
 
-ARGV.each do |filename|
-  puts Hermes.run(filename)
-end
+Hermes::CLI.start

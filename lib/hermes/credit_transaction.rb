@@ -1,7 +1,7 @@
 class CreditTransaction
   attr_reader :account, :amount
 
-  def initialize(account: account, amount: amount, **etc)
+  def initialize(account:, amount:, **etc)
     @account = account
     @amount  = amount.to_i
   end

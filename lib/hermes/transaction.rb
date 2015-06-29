@@ -1,3 +1,5 @@
+# A factory module to generate the appropriate transaction object for the input
+# line type.
 module Transaction
   extend self
 
