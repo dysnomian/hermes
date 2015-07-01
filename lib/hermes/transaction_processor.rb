@@ -9,9 +9,8 @@ class TransactionProcessor
   def run
     begin
       transactions
-    rescue
-      puts "Error: Your input doesn't appear to be formatted correctly. \n\n"\
-        "You entered:\n\n #{File.read(self.filename)}"
+    rescue FileFormatError
+      puts UIText.file_format_error(filename).to_s
       false
     end
   end

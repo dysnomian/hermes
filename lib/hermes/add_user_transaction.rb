@@ -1,18 +1,13 @@
 require 'luhn'
 
-class AddUserTransaction
-  attr_reader :amount, :account, :card_number
-
-  def initialize(amount:, account:, card_number:, **etc)
-    @amount      = amount
-    @account     = account
-    @card_number = card_number
-  end
-
+class AddUserTransaction < AbstractTransaction
+  # TODO (liss) gods, this is ugly. #tap it at the very least
   def apply(balances)
     balance = balances.fetch(:account, false)
+    # if the account doesn't exist, initialize it with the given amount
     if balance == false && valid?
       balances[account] = amount
+    # Otherwise, leave it alone
     else
       balances[account] = nil
     end

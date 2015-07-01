@@ -8,8 +8,6 @@ module Hermes
   def run(filename)
       if transactions = TransactionProcessor.new(filename).run
         Register.new(transactions: transactions).print
-      else
-        puts "Error, exiting."
       end
   end
 end
