@@ -5,20 +5,20 @@ class InputLine
     @keywords ||= input_string.split(" ")
   end
 
-  def to_hash
-    {
-      type:        type,
-      account:     account,
-      card_number: card_number,
-      amount:      amount
-    }
+  def to_a
+    [valid?, type, account, amount]
+  end
+
+  private
+
+  # NOTE: Returns 0 since nil in the leading place on a list gets ignored
+  def valid?
+    card_number ? LuhnCheck.valid?(card_number) : 0
   end
 
   def type
     keywords[0].downcase.to_sym
   end
-
-  private
 
   def account
     keywords[1]
@@ -29,11 +29,11 @@ class InputLine
   end
 
   def card_number
-    type == :add ? keywords[2].to_i : nil
+    type == :add ? keywords[2] : nil
   end
 
   def parse_amount(string)
-    amount_regex.match(string)[1].to_f
+    amount_regex.match(string)[1].to_i
   end
 
   def amount_regex

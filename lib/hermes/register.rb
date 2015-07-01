@@ -1,17 +1,19 @@
+# Takes an array of transactions and converts them to a hash of balances.
 class Register
   attr_reader :transactions
 
-  def initialize(transactions:)
+  def initialize(transactions)
     @transactions = transactions
   end
 
-  def apply_all
+  def account_balances
     transactions.reduce({}) do |balances, transaction|
-      balances = transaction.apply(balances)
+      account_balance = balances[transaction.account]
+      balances.merge(transaction.to_hash(account_balance))
     end
   end
 
-  def print
-    AccountsPresenter.new(apply_all).print
+  def display_balances
+    BalancePresenter.new(account_balances).print
   end
 end

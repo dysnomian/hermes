@@ -1,14 +1,23 @@
-require "thor"
-require "hermes"
+module CLI
+  extend self
 
-module Hermes
-  class CLI < Thor
-    desc "balances PATH_TO_FILE", "Example: hermes parse filename.txt"
+  def run(args)
+    puts version
 
-    default_task :balances
-
-    def balances(path)
-      Hermes.run(path)
+    if args.empty?
+      puts banner
+    else
+      Hermes.run(args.first)
     end
+  end
+
+  private
+
+  def version
+    "Hermes version #{Hermes::VERSION}\n\n"
+  end
+
+  def banner
+    "Usage: hermes FILENAME\n"
   end
 end

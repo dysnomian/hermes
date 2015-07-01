@@ -10,7 +10,10 @@ Gem::Specification.new do |spec|
   spec.version       = Hermes::VERSION
 
   spec.summary       = %q{A cool programming problem with a focus on good design.}
-  spec.description   = %q{Processes debits, credits, and credit card validation.}
+  spec.description   = "Processes debits, credits, and credit card validation. "\
+                         "Special thanks to Coraline Ehmke and Tina Wuest for "\
+                         "reigniting my interest and helping me make this a "\
+                         "fun learning process. <3!"
   spec.homepage      = "http://github.com/dysnomian/hermes"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -21,7 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler",     "~> 1.9"
   spec.add_development_dependency "rake",        "~> 10.0"
   spec.add_development_dependency "rspec",       "~> 3.2"
-  spec.add_dependency             "thor",        "~> 0.19"
-  spec.add_dependency             "require_all", "~> 1.3"
-  spec.add_dependency             "luhn",        "~> 0.1"
+  spec.add_dependency             "funtools",    "~> 0.7"
 end

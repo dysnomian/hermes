@@ -1,68 +1,45 @@
 describe Register do
-    let(:register) { Register.new(transactions: transactions) }
+  let(:register) { Register.new(transactions) }
 
   let(:add_transaction) do
-    AddUserTransaction.new(
-      card_number: 4111111111111111,
-      account:     'Mabel',
-      amount:      25
-    )
+    double(
+      account: 'Mabel',
+      to_hash: { "Mabel" => 25 })
   end
 
-  let(:add_transaction_2) do
-    AddUserTransaction.new(
-      card_number: 5454545454545454,
-      account:     'Soos',
-      amount:      3
-    )
-  end
-
-  let(:invalid_add_transaction) do
-    AddUserTransaction.new(
-      card_number: 1234567890123456,
-      account:     'Dipper',
-      amount:      30000000000
-    )
+  let(:error_transaction) do
+    double(
+      account: 'Stan',
+      to_hash: { 'Stan' => nil })
   end
 
   let(:credit_transaction) do
-    CreditTransaction.new(
+    double(
       account: 'Mabel',
-      amount:  25
-    )
+      to_hash: { 'Mabel' => 50 })
   end
 
   let(:charge_transaction) do
-    ChargeTransaction.new(
+    double(
       account: 'Mabel',
-      amount:  15
-    )
+      to_hash: { 'Mabel' => 40 })
   end
 
-  let(:charge_transaction_2) do
-    ChargeTransaction.new(
-      account: 'Soos',
-      amount:  15
-    )
-  end
 
   let(:transactions) do
     [add_transaction,
-     add_transaction_2,
-     invalid_add_transaction,
      credit_transaction,
      charge_transaction,
-     charge_transaction_2]
+     error_transaction]
   end
 
-  describe '#apply_all' do
-    subject { register.apply_all }
+  describe '#account_balances' do
+    subject { register.account_balances }
 
     let(:balances) do
       {
-        'Mabel' => 35,
-        'Soos' => -12,
-        'Dipper' => nil
+        'Mabel' => 40,
+        'Stan'  => nil
       }
     end
 

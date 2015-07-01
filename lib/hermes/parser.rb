@@ -1,4 +1,4 @@
-# Takes a filename and converts the lines into InputLine objects.
+# Takes a filename and converts the lines into an array of transactions.
 class Parser
   attr_reader :filename
 
@@ -6,12 +6,17 @@ class Parser
     @filename = filename
   end
 
-  def parse
-    file_lines.map { |line| InputLine.new(line) }
+  def transaction_array
+    input_arrays.map { |ia| TransactionFactory.build(*ia) }
   end
+
   private
 
-  def file_lines
-    @file_lines ||= File.readlines(self.filename)
+  def input_arrays
+    lines.map { |line| InputLine.new(line).to_a }
+  end
+
+  def lines
+    @lines ||= File.readlines(self.filename)
   end
 end

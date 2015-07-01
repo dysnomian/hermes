@@ -2,4 +2,4 @@
 
 require 'hermes'
 
-Hermes::CLI.start
+CLI.run(ARGV)

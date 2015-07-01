@@ -1,21 +1,18 @@
-# A factory module to generate the appropriate transaction object for the input
-# line type.
-module Transaction
-  extend self
+class Transaction
+  attr_reader :account
 
-  def generate_from(input_line)
-    hash = input_line.to_hash
-    case
-    when hash[:type] == :add
-      AddUserTransaction.new(hash)
-    when hash[:type] == :charge
-      ChargeTransaction.new(hash)
-    when hash[:type] == :credit
-      CreditTransaction.new(hash)
-    else
-      raise FormatError
-    end
+  def initialize(account, change)
+    @account = account
+    @change  = change
+  end
+
+  def to_hash(balance)
+    { account => change.call(balance) }
+  end
+
+  private
+
+  def change
+    @change
   end
 end
-
-class FormatError < StandardError; end

@@ -1,22 +1,28 @@
 describe Parser do
   let(:parser)   { Parser.new(filename) }
   let(:filename) { 'filename.txt' }
-
-  before do
-    allow(File).to receive(:readlines)
-      .with(filename).and_return(input)
-  end
+  let(:account)  { "Soos" }
 
   let(:input) do
-    ["Add Soos 4111111111111111 $1000\n",
-     "Credit Dipper $200\n"]
+    [ "Add #{account} 4111111111111111 $1000\n"]
   end
 
-  describe '#parse' do
-    subject { parser.parse }
+  let(:transaction) { double(:transaction) }
 
-    it 'returns an array of InputLines' do
-      expect(subject.first).to be_an(InputLine)
+  before do
+    allow(File).to receive(:readlines).with(filename) { input }
+  end
+
+  describe '#transaction_array' do
+    subject { parser.transaction_array }
+
+    before do
+      allow(TransactionFactory).to receive(:build).
+        with(true, :add, account, 1000) { transaction }
+    end
+
+    it 'returns the expected array of transactions' do
+      expect(subject.first).to eq(transaction)
     end
   end
 end
