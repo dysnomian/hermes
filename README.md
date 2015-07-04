@@ -10,7 +10,7 @@ Install it with:
 ```
 git clone git@github.com:dysnomian/hermes.git
 cd hermes
-gem install pkg/pkg/hermes-0.1.0.gem
+gem install hermes-0.1.0.gem
 ```
 
 ## Usage
